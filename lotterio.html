@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lottery Numbers Generator</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="mobile-web-app-capable" content="yes">
+	<link rel="icon" type="image/png" href="lottery_numbers_generator-icon.png">
+	<style>
+	@-ms-viewport {
+	  width: device-width;
+	}
+	body {
+		text-align: center;
+		font-family: "OpenSans", Verdana, sans-serif;
+		margin:0;
+		padding:0;
+	}
+	.hr {
+		border-bottom: 1px dotted silver;
+		margin-top:15px;
+		margin-bottom: 15px;
+	}
+	h2 {
+		margin-bottom: 5px;
+		margin-top: 10px;
+		padding: 0;
+		font-size: 14px;
+		color:teal;
+	}
+	.btn {
+		margin-bottom: 10px;
+		padding: 7px 14px;
+		background: transparent;
+		border:1px solid silver;
+		border-radius: 4px;
+		color:silver;
+	}
+	.app_btn {
+	  margin-bottom: 10px;
+	  padding: 10px 20px;
+	  background: gray;
+	  border:1px solid gray;
+	  border-radius: 4px;
+	  color:white;
+	  cursor: pointer;
+	}
+	.placeholder {
+		margin-bottom: 5px;
+		font-weight: bold;
+	}
+	</style>
+	<script>
+	function r(i){return Math.random()*i+1;}
+	function f(i){return Math.floor(i);}
+	function g(kolik, zKolika, kam){
+		var pole = [];
+		do {
+			var x = f(r(zKolika));
+			if(pole.indexOf(x)<0){
+				pole.push(x);
+			}
+		}
+		while(pole.length < kolik);
+		var y = pole.sort(function (a, b){ return a-b}).join(' - ');
+		//console.log("*** GENERATOR CISEL:"+ kam +": "+ y);
+		document.getElementById(kam).innerHTML = y;
+	}
+	</script>
+</head>
+<body onLoad="g(6, 49, 'id_sportka'); g(5, 50, 'id_eurojackpot'); g(2, 10, 'id_eurojackpot2'); g(5, 50, 'id_euromiliony'); g(2, 12, 'id_euromiliony2');">
+
+<div style="background:teal; padding: 15px 20px; color:white; text-align:center;">Generátor čísel loterie</div>
+<h2>Sportka</h2>
+<div id="id_sportka" class="placeholder"></div>
+<input type="button" onclick="g(6, 49, 'id_sportka')" value="generovat" class="app_btn">
+
+<div class="hr"></div>
+
+<h2>Eurojackpot</h2>
+<div id="id_eurojackpot" class="placeholder"></div>
+<div id="id_eurojackpot2" class="placeholder"></div>
+<input type="button" onclick="g(5, 50, 'id_eurojackpot'); g(2, 10, 'id_eurojackpot2');" value="generovat" class="app_btn">
+
+<div class="hr"></div>
+
+<h2>Euro miliony</h2>
+<div id="id_euromiliony" class="placeholder"></div>
+<div id="id_euromiliony2" class="placeholder"></div>
+<input type="button" onclick="g(5, 50, 'id_euromiliony'); g(2, 12, 'id_euromiliony2');" value="generovat" class="app_btn">
+
+<div class="hr"></div>
+
+</body>
+</html>
